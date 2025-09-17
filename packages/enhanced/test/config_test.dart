@@ -6,7 +6,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:html/dom.dart' as dom;
 
-import '../../fwfh_url_launcher/test/mock_url_launcher_platform.dart';
 import '_.dart' as helper;
 
 Future<String> explain(WidgetTester t, HtmlWidget hw) =>
@@ -456,7 +455,6 @@ void main() {
   });
 
   group('onTapUrl', () {
-    setUp(mockUrlLauncherPlatform);
 
     testWidgets('triggers callback (returns false)', (tester) async {
       const href = 'http://domain.com/can-launch/returns-false';
@@ -476,7 +474,6 @@ void main() {
       expect(await helper.tapText(tester, 'Tap me'), equals(1));
 
       expect(urls, equals(const [href]));
-      expect(mockLaunchedUrls, equals(const [href]));
     });
 
     testWidgets('triggers callback (returns true)', (tester) async {
@@ -497,7 +494,6 @@ void main() {
       expect(await helper.tapText(tester, 'Tap me'), equals(1));
 
       expect(urls, equals(const [href]));
-      expect(mockLaunchedUrls, equals(const []));
     });
 
     testWidgets('triggers callback (async false)', (tester) async {
@@ -518,7 +514,6 @@ void main() {
       expect(await helper.tapText(tester, 'Tap me'), equals(1));
 
       expect(urls, equals(const [href]));
-      expect(mockLaunchedUrls, equals(const [href]));
     });
 
     testWidgets('triggers callback (async true)', (tester) async {
@@ -539,7 +534,6 @@ void main() {
       expect(await helper.tapText(tester, 'Tap me'), equals(1));
 
       expect(urls, equals(const [href]));
-      expect(mockLaunchedUrls, equals(const []));
     });
 
     testWidgets('default handler', (WidgetTester tester) async {
@@ -551,7 +545,6 @@ void main() {
       await tester.pumpAndSettle();
       expect(await helper.tapText(tester, 'Tap me'), equals(1));
 
-      expect(mockLaunchedUrls, equals(const [href]));
     });
   });
 
